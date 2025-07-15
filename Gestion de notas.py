@@ -1,5 +1,5 @@
-def mostrar_menu():
-    print("\n-Gestión de Notas-")
+def show_menu():
+    print("-Gestión de Notas-")
     print("1. Agregar estudiante")
     print("2. Quitar estudiante")
     print("3. Mostrar estudiantes aprobados")
@@ -7,69 +7,72 @@ def mostrar_menu():
     print("5. Mostrar todos los estudiantes")
     print("6. Salir")
 
-def agregar_estudiante(estudiantes):
-    nombre = input("Ingrese el nombre del estudiante: ")
-    if nombre in estudiantes:
+def add_student(students):
+    name = input("Ingrese el nombre del estudiante: ")
+    if name in students:
         print("El estudiante ya está registrado.")
-        return
-    notas = []
-    for calificacion in range(1, 4):
+        
+    marks = []
+    for qualification in range(1, 4):
         while True:
-            nota = float(input(f"Ingrese la nota {calificacion} (0-10): "))           
-            notas.append(nota)
-            break
+            mark = float(input(f"Ingrese la nota {qualification} (0-10): "))
+            if 0 <= mark <= 10:                               
+                marks.append(mark)
+                break
+            else:
+                print("Número no válido, vuelva a ingresar nota")
                 
-    estudiantes[nombre] = notas
-    print(f"Estudiante {nombre} agregado.")
+    students[name] = marks
+    print(f"Estudiante {name} agregado.")
 
-def quitar_estudiante(estudiantes):
-    nombre = input("Ingrese el nombre del estudiante a eliminar: ")
-    if nombre in estudiantes:
-        del estudiantes[nombre]
-        print(f"Estudiante {nombre} eliminado.")
+def remove_student(students):
+    name = input("Ingrese el nombre del estudiante a eliminar: ")
+    if name in students:
+        del students[name]
+        print(f"Estudiante {name} eliminado.")
     else:
         print("Estudiante no encontrado.")
 
-def mostrar_aprobados(estudiantes):
-    print("\n-Estudiantes Aprobados-")
-    for nombre, notas in estudiantes.items():
-        promedio = sum(notas) / len(notas)
-        if promedio >= 6:
-            print(f"{nombre}: Promedio = {promedio:.2f}")
+def show_approved(students):
+    print("-Estudiantes Aprobados-")
+    for name, marks in students.items():
+        average = sum(marks) / len(marks)
+        if average >= 6:
+            print(f"{name}: Promedio = {average:.2f}")
 
-def buscar_estudiante(estudiantes):
-    nombre = input("Ingrese el nombre del estudiante que busca: ")
-    if nombre in estudiantes:
-        notas = estudiantes[nombre]
-        promedio = sum(notas) / len(notas)
-        print(f"{nombre}: Notas = {notas}, Promedio = {promedio:.2f}")
+def search_student(students):
+    name = input("Ingrese el nombre del estudiante que busca: ")
+    if name in students:
+        marks = students[name]
+        average = sum(marks) / len(marks)
+        print(f"{name}: Notas = {marks}, Promedio = {average:.2f}")
     else:
         print("Estudiante no encontrado.")
 
-def mostrar_todos(estudiantes):
-    print("\n-Todos los Estudiantes-")
-    for nombre, notas in estudiantes.items():
-        promedio = sum(notas) / len(notas)
-        print(f"{nombre}: Notas = {notas}, Promedio = {promedio:.2f}")
+def show_all_students(students):
+    print("-Todos los Estudiantes-")
+    for name, marks in students.items():
+        average = sum(marks) / len(marks)
+        print(f"{name}: Notas = {marks}, Promedio = {average:.2f}")
 
 def main():
-    estudiantes = {}
+    students = {}
 
     while True:
-        mostrar_menu()
-        opcion = input("Seleccione una opción: ")
+        show_menu()
+        option = input("Seleccione una opción: ")
 
-        if opcion == '1':
-            agregar_estudiante(estudiantes)
-        elif opcion == '2':
-            quitar_estudiante(estudiantes)
-        elif opcion == '3':
-            mostrar_aprobados(estudiantes)
-        elif opcion == '4':
-            buscar_estudiante(estudiantes)
-        elif opcion == '5':
-            mostrar_todos(estudiantes)
-        elif opcion == '6':
+        if option == '1':
+            add_student(students)
+        elif option == '2':
+            remove_student(students)
+        elif option == '3':
+            show_approved(students)
+        elif option == '4':
+            search_student(students)
+        elif option == '5':
+            show_all_students(students)
+        elif option == '6':
             print("Saliendo del programa.")
             break
         else:
